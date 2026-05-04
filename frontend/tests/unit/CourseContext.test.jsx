@@ -41,12 +41,6 @@ describe('CourseProvider', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     localStorage.clear()
-    vi.useFakeTimers()
-  })
-
-  afterEach(() => {
-    vi.runOnlyPendingTimers() 
-    vi.useRealTimers()
   })
 
   it('loads and saves guest planner state in localStorage', async () => {
@@ -110,6 +104,8 @@ describe('CourseProvider', () => {
       expect(screen.getByTestId('major')).toHaveTextContent('EE')
     )
 
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+
     await userEvent.click(screen.getByText('submit'))
     await userEvent.click(screen.getByText('roadmap'))
 
@@ -117,7 +113,12 @@ describe('CourseProvider', () => {
       await new Promise((resolve) => setTimeout(resolve, 350))
     })
 
+    vi.advanceTimersByTime(1500)
+    vi.useRealTimers()
+
     await waitFor(() => expect(updatePlannerState).toHaveBeenCalled())
+
+
     expect(getPlannerState).toHaveBeenCalled()
   })
 })
