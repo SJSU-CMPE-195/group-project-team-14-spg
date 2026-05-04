@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { CourseProvider } from '../../src/utils/CourseContext.jsx'
@@ -41,6 +41,12 @@ describe('CourseProvider', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     localStorage.clear()
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.runOnlyPendingTimers() 
+    vi.useRealTimers()
   })
 
   it('loads and saves guest planner state in localStorage', async () => {
