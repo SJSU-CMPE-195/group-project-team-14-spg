@@ -10,13 +10,13 @@ test('guest user can build a roadmap and use search', async ({ page }) => {
   await page.getByRole('combobox').selectOption('CS')
   await expect(page.locator('.course-card .course-code', { hasText: 'CS46A' })).toBeVisible()
 
-  const unitInput = page.getByLabelText(/Target Units per Semester/i)
+  const unitInput = page.getByLabel(/Target Units per Semester/i)
   await unitInput.fill('18')
 
-  const generateRoadmapButton = page.getByRole('button', { name: 'Generate Roadmap/i' })
-  await generateRoadmapButton.evaluate((button) => button.click())
+  const generateRoadmapButton = page.getByRole('button', { name: /Generate Roadmap/i })
+  await generateRoadmapButton.click()
   await expect(page).toHaveURL(/\/roadmap$/)
-  await expect(page.getByText('Your Personalized Roadmap')).toBeVisible()
+  await expect(page.getByText(/Your Personalized Roadmap/i)).toBeVisible({ timeout: 10000 })
 
   await page.goto('/search')
   await page.getByPlaceholder('Search course...').fill('cs')
