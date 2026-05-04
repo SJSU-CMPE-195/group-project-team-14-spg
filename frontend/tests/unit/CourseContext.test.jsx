@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest'
-import { act, render, screen, waitFor } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { CourseProvider } from '../../src/utils/CourseContext.jsx'
 import { CourseContext } from '../../src/utils/CourseContext'
@@ -109,10 +109,13 @@ describe('CourseProvider', () => {
     await userEvent.click(screen.getByText('roadmap'))
 
     const roadmapHeader = await screen.findByText('Your Personalized Roadmap', {}, { timeout: 2000 })
+    expect(roadmapHeader).toBeInTheDocument()
 
-    await waitFor(() => expect(updatePlannerState).toHaveBeenCalled())
-
-
+    await waitFor(() => {
+      // proves that debounce worked
+      expect(updatePlannerState).toHaveBeenCalledTimes(1)
+    })
+    
     expect(getPlannerState).toHaveBeenCalled()
   })
 })
