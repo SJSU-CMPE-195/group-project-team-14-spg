@@ -16,7 +16,7 @@ test('guest user can build a roadmap and use search', async ({ page }) => {
   const generateRoadmapButton = page.getByRole('button', { name: /Generate Roadmap/i })
   await generateRoadmapButton.click()
   await expect(page).toHaveURL(/\/roadmap$/)
-  await expect(page.getByText(/Your Personalized Roadmap/i)).toBeVisible({ timeout: 10000 })
+  await expect(page.getByRole('heading', { name: /Your Personalized Roadmap/i })).toBeVisible({ timeout: 10000 })
 
   await page.goto('/search')
   await page.getByPlaceholder('Search course...').fill('cs')
