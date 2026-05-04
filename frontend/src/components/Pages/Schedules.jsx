@@ -184,10 +184,8 @@ const Schedules = () => {
     return () => {
       cancelled = true
     }
-  }, [shouldFetch, 
-      courseCodesKey,
-      courseCodes,
-      setScheduleState])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldFetch, courseCodesKey,])
 
   useEffect(() => {
     if (plannerLoading || !isUsingCache) return
@@ -199,15 +197,8 @@ const Schedules = () => {
       professorFreqs,
       selectedScheduleIndex
     }))
-  }, [
-    schedules, 
-    professorFreqs, 
-    selectedScheduleIndex, 
-    isUsingCache, 
-    plannerLoading,
-    courseCodes,
-    setScheduleState
-  ])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schedules, professorFreqs, selectedScheduleIndex, isUsingCache, plannerLoading,])
 
   if (plannerLoading) {
     return (

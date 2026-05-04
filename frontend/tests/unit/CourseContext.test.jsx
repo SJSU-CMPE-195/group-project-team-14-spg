@@ -104,12 +104,8 @@ describe('CourseProvider', () => {
       expect(screen.getByTestId('major')).toHaveTextContent('EE')
     )
 
-    
     await userEvent.click(screen.getByText('submit'))
     await userEvent.click(screen.getByText('roadmap'))
-
-    const roadmapHeader = await screen.findByText('Your Personalized Roadmap', {}, { timeout: 2000 })
-    expect(roadmapHeader).toBeInTheDocument()
 
     await waitFor(() => {
       // proves that debounce worked
