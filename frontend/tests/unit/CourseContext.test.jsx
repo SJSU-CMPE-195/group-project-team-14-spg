@@ -104,17 +104,11 @@ describe('CourseProvider', () => {
       expect(screen.getByTestId('major')).toHaveTextContent('EE')
     )
 
-    vi.useFakeTimers({ shouldAdvanceTime: true })
-
+    
     await userEvent.click(screen.getByText('submit'))
     await userEvent.click(screen.getByText('roadmap'))
 
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 350))
-    })
-
-    vi.advanceTimersByTime(1500)
-    vi.useRealTimers()
+    const roadmapHeader = await screen.findByText('Your Personalized Roadmap', {}, { timeout: 2000 })
 
     await waitFor(() => expect(updatePlannerState).toHaveBeenCalled())
 
