@@ -184,7 +184,10 @@ const Schedules = () => {
     return () => {
       cancelled = true
     }
-  }, [shouldFetch, courseCodesKey])
+  }, [shouldFetch, 
+      courseCodesKey,
+      courseCodes,
+      setScheduleState])
 
   useEffect(() => {
     if (plannerLoading || !isUsingCache) return
@@ -201,7 +204,9 @@ const Schedules = () => {
     professorFreqs, 
     selectedScheduleIndex, 
     isUsingCache, 
-    plannerLoading
+    plannerLoading,
+    courseCodes,
+    setScheduleState
   ])
 
   if (plannerLoading) {

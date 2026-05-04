@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { CourseProvider } from '../../src/utils/CourseContext.jsx'
